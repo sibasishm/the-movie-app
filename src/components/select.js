@@ -1,22 +1,63 @@
-function Select({ value, onChange }) {
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx, useTheme } from '@emotion/react';
+
+function Select({ value, onChange, children }) {
 	return (
-		<div>
-			<select name="" id="" value={value} onChange={onChange}>
-				<option value="all">All</option>
-				<option value="movies">Movies</option>
-				<option value="TV Series">TV Series</option>
-			</select>
-			{/* <div>
-				<svg
-					fill="currentColor"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 20 20"
-				>
-					<path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-				</svg>
-			</div> */}
+		<div
+			css={{
+				marginTop: '0.5rem',
+				position: 'relative',
+			}}
+		>
+			{children}
 		</div>
 	);
 }
+
+/**
+ * Accessibility checks
+  https://www.w3.org/TR/wai-aria-practices/#Listbox
+  https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html
+ */
+
+Select.Button = function Button({ children }) {
+	const theme = useTheme();
+	return (
+		<button
+			aria-haspopup="listbox"
+			aria-expanded="true"
+			aria-labelledby="listbox-label"
+			css={{
+				position: 'relative',
+				width: '100%',
+				background: theme.bg,
+				border: `1px solid ${theme.border}`,
+				borderRadius: '4px',
+				padding: '4px 6px 4px 16px',
+				textAlign: 'left',
+			}}
+		>
+			{children}
+		</button>
+	);
+};
+
+Select.Options = function Options({ children }) {
+	return (
+		<div
+			css={{
+				position: 'absolute',
+				marginTop: '0.5rem',
+			}}
+		>
+			<ul>{children}</ul>
+		</div>
+	);
+};
+
+Select.Option = function Option({ children }) {
+	return <li>{children}</li>;
+};
 
 export { Select };
