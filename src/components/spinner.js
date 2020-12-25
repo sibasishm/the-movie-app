@@ -35,4 +35,19 @@ function Spinner() {
 	);
 }
 
-export { Spinner };
+function FullPageSpinner() {
+	return (
+		<div
+			css={{
+				display: 'flex',
+				flexDirection: 'column',
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}
+		>
+			<Spinner />
+		</div>
+	);
+}
+
+export { Spinner, FullPageSpinner };
