@@ -3,7 +3,7 @@
 import { jsx, useTheme } from '@emotion/react';
 import { screenReaderOnly } from './design-system';
 
-function SearchBox() {
+function SearchBox({ value, onChange }) {
 	const theme = useTheme();
 	return (
 		<div
@@ -52,6 +52,10 @@ function SearchBox() {
 				id="seach"
 				autoComplete="off"
 				placeholder="Search"
+				value={value}
+				onChange={e => {
+					onChange(e.target.value);
+				}}
 				css={{
 					padding: '0.5rem 2.5rem',
 					background: theme.bg,

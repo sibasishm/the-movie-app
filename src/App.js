@@ -1,10 +1,11 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
+import * as React from 'react';
 import { jsx, useTheme } from '@emotion/react';
 import { Routes, Route } from 'react-router-dom';
+import Select from 'react-select';
 
-import { Nav, SearchBox } from './components';
-import { DiscoveryForm } from './containers';
+import { Nav, SearchBox, Label, Rating } from './components';
 import {
 	NewestScreen,
 	NotFoundScreen,
@@ -12,9 +13,43 @@ import {
 	TopRatedScreen,
 	TrendScreen,
 } from './screens';
+import { types, genres, years } from './constants';
+import * as colors from './styles/colors';
+
+const customStyles = {
+	menu: provided => ({
+		...provided,
+		background: colors.bg,
+	}),
+	input: provided => ({
+		...provided,
+		color: colors.text,
+	}),
+	singleValue: provided => ({
+		...provided,
+		color: colors.text,
+	}),
+	control: provided => ({
+		...provided,
+		background: colors.bg,
+		border: `1px solid ${colors.border}`,
+	}),
+	option: (provided, state) => ({
+		...provided,
+		color: state.isSelected ? colors.text : colors.textOffset,
+	}),
+};
 
 function App() {
 	const theme = useTheme();
+
+	const [type, setType] = React.useState(types[0].value);
+	const [genre, setGenre] = React.useState(genres[0].value);
+	const [startYear, setStartYear] = React.useState(years[0].value);
+	const [endYear, setEndYear] = React.useState(years[10].value);
+	const [rating, setRating] = React.useState(3);
+	const [searchTerm, setSearchTerm] = React.useState('');
+
 	return (
 		<div
 			css={{
@@ -44,7 +79,7 @@ function App() {
 				>
 					<h1>Discover</h1>
 					<Nav />
-					<SearchBox />
+					<SearchBox val={searchTerm} onChange={setSearchTerm} />
 				</header>
 				<main
 					css={{
@@ -72,7 +107,66 @@ function App() {
 				}}
 			>
 				<h3>Discover options</h3>
-				<DiscoveryForm />
+				<form>
+					<Label>Type</Label>
+					<Select
+						value={type}
+						styles={customStyles}
+						options={types}
+						onChange={val => setType(val)}
+					/>
+					<Label>Genre</Label>
+					<Select
+						value={genre}
+						styles={customStyles}
+						options={genres}
+						onChange={val => setGenre(val)}
+					/>
+					<Label>Year</Label>
+					<div
+						css={{
+							display: 'flex',
+							alingItems: 'center',
+						}}
+					>
+						<span
+							css={{
+								width: '100%',
+							}}
+						>
+							<Select
+								value={startYear}
+								styles={customStyles}
+								options={years}
+								onChange={val => setStartYear(val)}
+							/>
+						</span>
+
+						<span
+							css={{
+								fontSize: '2rem',
+								fontWeight: 700,
+								padding: '0 0.5rem',
+							}}
+						>
+							-
+						</span>
+						<span
+							css={{
+								width: '100%',
+							}}
+						>
+							<Select
+								value={endYear}
+								styles={customStyles}
+								options={years}
+								onChange={val => setEndYear(val)}
+							/>
+						</span>
+					</div>
+					<Label>Rating</Label>
+					<Rating value={rating} onChange={val => setRating(val)} />
+				</form>
 			</aside>
 		</div>
 	);
