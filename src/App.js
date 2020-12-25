@@ -53,6 +53,7 @@ function App() {
 						top: '0',
 						background: theme.bg,
 						padding: '1.5rem 2rem',
+						height: '4.5rem',
 					}}
 				>
 					<h1>Discover</h1>
