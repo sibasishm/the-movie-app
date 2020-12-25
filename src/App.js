@@ -3,7 +3,8 @@
 import { jsx, useTheme } from '@emotion/react';
 import { Routes, Route } from 'react-router-dom';
 
-import { Label, Nav, Rating, SearchBox, Select } from './components';
+import { Nav, SearchBox } from './components';
+import { DiscoveryForm } from './containers';
 import {
 	NewestScreen,
 	NotFoundScreen,
@@ -11,21 +12,6 @@ import {
 	TopRatedScreen,
 	TrendScreen,
 } from './screens';
-
-const types = [
-	{
-		id: 1,
-		name: 'All',
-	},
-	{
-		id: 2,
-		name: 'Movies',
-	},
-	{
-		id: 3,
-		name: 'TV Series',
-	},
-];
 
 function App() {
 	const theme = useTheme();
@@ -86,43 +72,7 @@ function App() {
 				}}
 			>
 				<h3>Discover options</h3>
-				<form>
-					<Label>Type</Label>
-					<Select value={types[1]} onChange={() => {}}>
-						<Select.Button>Movies</Select.Button>
-						<Select.Options>
-							{types.map(type => (
-								<Select.Option key={type.id} value={type}>
-									{type.name}
-								</Select.Option>
-							))}
-						</Select.Options>
-					</Select>
-					<Label>Genre</Label>
-					<Select value={types[1]} onChange={() => {}}>
-						<Select.Button>Movies</Select.Button>
-						<Select.Options>
-							{types.map(type => (
-								<Select.Option key={type.id} value={type}>
-									{type.name}
-								</Select.Option>
-							))}
-						</Select.Options>
-					</Select>
-					<Label>Year</Label>
-					<Select value={types[1]} onChange={() => {}}>
-						<Select.Button>Movies</Select.Button>
-						<Select.Options>
-							{types.map(type => (
-								<Select.Option key={type.id} value={type}>
-									{type.name}
-								</Select.Option>
-							))}
-						</Select.Options>
-					</Select>
-					<Label>Rating</Label>
-					<Rating listItem={{ id: 1, rating: 3 }} />
-				</form>
+				<DiscoveryForm />
 			</aside>
 		</div>
 	);
