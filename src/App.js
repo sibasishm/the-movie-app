@@ -74,6 +74,7 @@ function App() {
 				<main>
 					<ol
 						css={{
+							padding: '1rem 0',
 							display: 'grid',
 							gap: '1rem',
 							gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',

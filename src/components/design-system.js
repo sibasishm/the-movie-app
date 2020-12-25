@@ -8,6 +8,8 @@ const Link = styled(RouterLink)({
 	color: colors.primary,
 	fontWeight: 700,
 	padding: '0 0.5rem',
+	textTransform: 'uppercase',
+	fontSize: '0.8rem',
 	':hover': {
 		color: colors.primaryOffset,
 	},
