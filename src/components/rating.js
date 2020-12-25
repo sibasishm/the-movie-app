@@ -20,7 +20,9 @@ function Rating({ value, onChange }) {
 					id={ratingId}
 					value={ratingValue}
 					checked={ratingValue === value}
-					onChange={() => {}}
+					onChange={() => {
+						onChange(ratingValue);
+					}}
 					css={[
 						screenReaderOnly,
 						{

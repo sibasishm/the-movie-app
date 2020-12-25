@@ -2,67 +2,93 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/react';
 import * as React from 'react';
-import { Label, Rating, Select } from '../components';
+import Select from 'react-select';
+import * as colors from '../styles/colors';
+import { Label, Rating } from '../components';
 
 const types = [
 	{
 		id: 1,
-		name: 'Movies',
+		label: 'Movies',
+		value: 'movies',
 	},
 	{
 		id: 2,
-		name: 'TV Series',
+		label: 'TV Series',
+		value: 'tv_series',
 	},
 ];
 
 const genres = [
 	{
 		id: 1,
-		name: 'Action',
+		label: 'Action',
+		value: 'action',
 	},
 	{
 		id: 2,
-		name: 'Drama',
+		label: 'Drama',
+		value: 'drama',
 	},
 	{
 		id: 3,
-		name: 'Comedy',
+		label: 'Comedy',
+		value: 'comedy',
 	},
 ];
 
-const years = new Array(20).fill(2000).map((val, i) => val + i);
+const years = new Array(20)
+	.fill(2000)
+	.map((val, i) => val + i)
+	.map(val => ({ id: val, label: val, value: val }));
 
 function DiscoveryForm() {
-	const [type, setType] = React.useState(types[0]);
-	const [genre, setGenre] = React.useState(genres[0]);
-	const [startYear, setStartYear] = React.useState(years[0]);
-	const [endYear, setEndYear] = React.useState(years[10]);
+	const [type, setType] = React.useState(types[0].value);
+	const [genre, setGenre] = React.useState(genres[0].value);
+	const [startYear, setStartYear] = React.useState(years[0].value);
+	const [endYear, setEndYear] = React.useState(years[10].value);
 	const [rating, setRating] = React.useState(3);
+
+	const customStyles = {
+		menu: provided => ({
+			...provided,
+			background: colors.bg,
+		}),
+		input: provided => ({
+			...provided,
+			color: colors.text,
+		}),
+		singleValue: provided => ({
+			...provided,
+			color: colors.text,
+		}),
+		control: provided => ({
+			...provided,
+			background: colors.bg,
+			border: `1px solid ${colors.border}`,
+		}),
+		option: (provided, state) => ({
+			...provided,
+			color: state.isSelected ? colors.text : colors.textOffset,
+		}),
+	};
 
 	return (
 		<form>
 			<Label>Type</Label>
-			<Select value={type} onChange={val => setType(val)} label="type">
-				<Select.Button>{type.name}</Select.Button>
-				<Select.Options>
-					{types.map(type => (
-						<Select.Option key={type.id} value={type}>
-							{type.name}
-						</Select.Option>
-					))}
-				</Select.Options>
-			</Select>
+			<Select
+				value={type}
+				styles={customStyles}
+				options={types}
+				onChange={val => setType(val)}
+			/>
 			<Label>Genre</Label>
-			<Select value={genre} onChange={val => setGenre(val)} label="genre">
-				<Select.Button>{genre.name}</Select.Button>
-				<Select.Options>
-					{genres.map(genre => (
-						<Select.Option key={genre.id} value={genre}>
-							{genre.name}
-						</Select.Option>
-					))}
-				</Select.Options>
-			</Select>
+			<Select
+				value={genre}
+				styles={customStyles}
+				options={genres}
+				onChange={val => setGenre(val)}
+			/>
 			<Label>Year</Label>
 			<div
 				css={{
@@ -70,20 +96,19 @@ function DiscoveryForm() {
 					alingItems: 'center',
 				}}
 			>
-				<Select
-					value={startYear}
-					onChange={val => setStartYear(val)}
-					label="start-year"
+				<span
+					css={{
+						width: '100%',
+					}}
 				>
-					<Select.Button>{startYear}</Select.Button>
-					<Select.Options>
-						{years.map(year => (
-							<Select.Option key={year} value={year}>
-								{year}
-							</Select.Option>
-						))}
-					</Select.Options>
-				</Select>
+					<Select
+						value={startYear}
+						styles={customStyles}
+						options={years}
+						onChange={val => setStartYear(val)}
+					/>
+				</span>
+
 				<span
 					css={{
 						fontSize: '2rem',
@@ -93,20 +118,18 @@ function DiscoveryForm() {
 				>
 					-
 				</span>
-				<Select
-					value={endYear}
-					onChange={val => setEndYear(val)}
-					label="end-year"
+				<span
+					css={{
+						width: '100%',
+					}}
 				>
-					<Select.Button>{endYear}</Select.Button>
-					<Select.Options>
-						{years.map(year => (
-							<Select.Option key={year} value={year}>
-								{year}
-							</Select.Option>
-						))}
-					</Select.Options>
-				</Select>
+					<Select
+						value={endYear}
+						styles={customStyles}
+						options={years}
+						onChange={val => setEndYear(val)}
+					/>
+				</span>
 			</div>
 			<Label>Rating</Label>
 			<Rating value={rating} onChange={val => setRating(val)} />
