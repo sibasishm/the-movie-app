@@ -41,7 +41,6 @@ function App() {
 					background: theme.bg,
 					color: theme.text,
 					flex: 1,
-					padding: '1.5rem 1rem',
 				}}
 			>
 				<header
@@ -49,6 +48,10 @@ function App() {
 						display: 'flex',
 						justifyContent: 'space-between',
 						alignItems: 'center',
+						position: 'sticky',
+						top: '0',
+						background: theme.bg,
+						padding: '1.5rem 2rem',
 					}}
 				>
 					<h1>Discover</h1>
@@ -57,7 +60,7 @@ function App() {
 				</header>
 				<main
 					css={{
-						padding: '1rem 0',
+						padding: '1rem 2rem',
 						display: 'grid',
 						gap: '1rem',
 						gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
@@ -68,8 +71,8 @@ function App() {
 			</div>
 			<aside
 				css={{
-					minWidth: '300px',
-					padding: '1.5rem 1rem',
+					minWidth: '350px',
+					padding: '2rem 1.5rem',
 					background: theme.bgOffset,
 					color: theme.textOffset,
 					boxShadow:
