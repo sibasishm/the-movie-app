@@ -2,6 +2,10 @@
 /** @jsx jsx */
 import { jsx, useTheme } from '@emotion/react';
 
+import { MovieCard } from './components/movie-card';
+import { Rating } from './components/rating';
+import { Select } from './components/select';
+
 function App() {
 	const theme = useTheme();
 	return (
@@ -12,13 +16,47 @@ function App() {
 				color: theme.text,
 			}}
 		>
-			<header>I am a header</header>
-			<main>
-				<h1>Hello World</h1>
-				<label htmlFor="name">Name</label>
-				<input type="text" name="name" id="name" />
-			</main>
-			<footer>I am a footer</footer>
+			<div>
+				<header>
+					<h1>Discover</h1>
+					<nav>
+						<ul>
+							<li>Popular</li>
+							<li>Trend</li>
+							<li>Newest</li>
+							<li>Top rated</li>
+						</ul>
+					</nav>
+					<div>Search</div>
+				</header>
+				<main>
+					<ol>
+						<li>
+							<MovieCard />
+						</li>
+						<li>
+							<MovieCard />
+						</li>
+					</ol>
+				</main>
+			</div>
+			<aside>
+				<h3>Discover options</h3>
+				<form>
+					<label htmlFor="type">Type</label>
+					<Select />
+					<label htmlFor="genre">Genre</label>
+					<Select />
+					<label htmlFor="year">year</label>
+					<div>
+						<Select />
+						<span> - </span>
+						<Select />
+					</div>
+					<label htmlFor="rating">Rating</label>
+					<Rating />
+				</form>
+			</aside>
 		</div>
 	);
 }
