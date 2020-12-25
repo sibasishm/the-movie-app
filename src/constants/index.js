@@ -34,4 +34,27 @@ const years = new Array(20)
 	.map((val, i) => val + i)
 	.map(val => ({ id: val, label: val, value: val }));
 
-export { types, genres, years };
+const links = [
+	{
+		id: 1,
+		name: 'Popular',
+		link: 'popular',
+	},
+	{
+		id: 2,
+		name: 'Trend',
+		link: 'trend',
+	},
+	{
+		id: 3,
+		name: 'Newest',
+		link: 'newest',
+	},
+	{
+		id: 4,
+		name: 'Top rated',
+		link: '/top-rated',
+	},
+];
+
+export { types, genres, years, links };

@@ -6,33 +6,14 @@ import Select from 'react-select';
 
 import { AppRoutes } from './app-routes';
 import { DiscoverProvider } from './context/discover-context';
-import { Nav, SearchBox, Label, Rating } from './components';
+import {
+	Nav,
+	SearchBox,
+	Label,
+	Rating,
+	customSelectStyles as customStyles,
+} from './components';
 import { types, genres, years } from './constants';
-import * as colors from './styles/colors';
-
-const customStyles = {
-	menu: provided => ({
-		...provided,
-		background: colors.bg,
-	}),
-	input: provided => ({
-		...provided,
-		color: colors.text,
-	}),
-	singleValue: provided => ({
-		...provided,
-		color: colors.text,
-	}),
-	control: provided => ({
-		...provided,
-		background: colors.bg,
-		border: `1px solid ${colors.border}`,
-	}),
-	option: (provided, state) => ({
-		...provided,
-		color: state.isSelected ? colors.text : colors.textOffset,
-	}),
-};
 
 function App() {
 	const theme = useTheme();

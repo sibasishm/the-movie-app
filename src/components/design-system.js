@@ -37,4 +37,28 @@ const screenReaderOnly = {
 	borderWidth: 0,
 };
 
-export { Link, Label, screenReaderOnly };
+const customSelectStyles = {
+	menu: provided => ({
+		...provided,
+		background: colors.bg,
+	}),
+	input: provided => ({
+		...provided,
+		color: colors.text,
+	}),
+	singleValue: provided => ({
+		...provided,
+		color: colors.text,
+	}),
+	control: provided => ({
+		...provided,
+		background: colors.bg,
+		border: `1px solid ${colors.border}`,
+	}),
+	option: (provided, state) => ({
+		...provided,
+		color: state.isSelected ? colors.text : colors.textOffset,
+	}),
+};
+
+export { Link, Label, screenReaderOnly, customSelectStyles };
