@@ -4,23 +4,13 @@ import { jsx } from '@emotion/react';
 import * as React from 'react';
 
 import * as colors from '../styles/colors';
+import { screenReaderOnly } from './design-system';
 
-const visuallyHiddenCSS = {
-	border: '0',
-	clip: 'rect(0 0 0 0)',
-	height: '1px',
-	margin: '-1px',
-	overflow: 'hidden',
-	padding: '0',
-	position: 'absolute',
-	width: '1px',
-};
-
-function Rating({ listItem }) {
-	const rootClassName = `list-item-${listItem.id}`;
+function Rating({ value, onChange }) {
+	const rootClassName = 'star-list';
 
 	const stars = Array.from({ length: 5 }).map((x, i) => {
-		const ratingId = `rating-${listItem.id}-${i}`;
+		const ratingId = `rating-${i}`;
 		const ratingValue = i + 1;
 		return (
 			<React.Fragment key={i}>
@@ -29,19 +19,15 @@ function Rating({ listItem }) {
 					type="radio"
 					id={ratingId}
 					value={ratingValue}
-					checked={ratingValue === listItem.rating}
+					checked={ratingValue === value}
 					onChange={() => {}}
 					css={[
-						visuallyHiddenCSS,
+						screenReaderOnly,
 						{
 							[`.${rootClassName} &:checked ~ label`]: { color: colors.border },
 							[`.${rootClassName} &:checked + label`]: {
 								color: colors.secondary,
 							},
-							// !important is here because we're doing special non-css-in-js things
-							// and so we have to deal with specificity and cascade. But, I promise
-							// this is better than trying to make this work with JavaScript.
-							// So deal with it 😎
 							[`.${rootClassName} &:hover ~ label`]: {
 								color: `${colors.border} !important`,
 							},
@@ -55,11 +41,11 @@ function Rating({ listItem }) {
 					htmlFor={ratingId}
 					css={{
 						cursor: 'pointer',
-						color: listItem.rating < 0 ? colors.border : colors.secondary,
+						color: value < 0 ? colors.border : colors.secondary,
 						margin: 0,
 					}}
 				>
-					<span css={visuallyHiddenCSS}>
+					<span css={screenReaderOnly}>
 						{ratingValue} {ratingValue === 1 ? 'star' : 'stars'}
 					</span>
 					<svg

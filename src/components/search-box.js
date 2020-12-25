@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, useTheme } from '@emotion/react';
+import { screenReaderOnly } from './design-system';
 
 function SearchBox() {
 	const theme = useTheme();
@@ -42,20 +43,7 @@ function SearchBox() {
 					/>
 				</svg>
 			</span>
-			<label
-				htmlFor="search"
-				css={{
-					position: 'absolute',
-					width: '1px',
-					height: '1px',
-					padding: 0,
-					margin: '-1px',
-					overflow: 'hidden',
-					clip: 'rect(0, 0, 0, 0)',
-					whiteSpace: 'nowrap',
-					borderWidth: 0,
-				}}
-			>
+			<label htmlFor="search" css={screenReaderOnly}>
 				Search
 			</label>
 			<input
@@ -72,6 +60,13 @@ function SearchBox() {
 					'::placeholder': {
 						color: theme.primary,
 						fontWeight: 600,
+					},
+					':hover': {
+						borderBottom: `2px solid ${theme.border}`,
+					},
+					':focus': {
+						outline: 0,
+						borderBottom: `2px solid ${theme.border}`,
 					},
 				}}
 			/>

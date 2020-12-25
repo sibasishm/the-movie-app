@@ -1,15 +1,24 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, useTheme } from '@emotion/react';
+import * as React from 'react';
 
-function Select({ value, onChange, children }) {
+function Select({ value, onChange, children, label }) {
+	const [isOpen, setIsOpen] = React.useState(false);
 	return (
 		<div
 			css={{
 				position: 'relative',
 			}}
 		>
-			{children}
+			{React.Children.map(children, child => {
+				if (child.type.name === 'Button') {
+					return React.cloneElement(child, { setIsOpen, isOpen, label });
+				} else if (child.type.name === 'Options') {
+					return React.cloneElement(child, { isOpen, label, value, onChange });
+				}
+				return React.cloneElement(child, { label });
+			})}
 		</div>
 	);
 }
@@ -20,13 +29,33 @@ function Select({ value, onChange, children }) {
   https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html
  */
 
-Select.Button = function Button({ children }) {
+Select.Button = function Button({ children, isOpen, setIsOpen, label }) {
 	const theme = useTheme();
+	const buttonRef = React.useRef(null);
+
+	React.useEffect(() => {
+		const handleClickOutside = e => {
+			if (buttonRef.current && !buttonRef.current.contains(e.target)) {
+				setIsOpen(false);
+			}
+		};
+
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [buttonRef, setIsOpen]);
+
 	return (
 		<button
+			ref={buttonRef}
 			aria-haspopup="listbox"
 			aria-expanded="true"
-			aria-labelledby="listbox-label"
+			aria-labelledby={`listbox-${label}`}
+			onClick={e => {
+				e.preventDefault();
+				setIsOpen(!isOpen);
+			}}
 			css={{
 				position: 'relative',
 				width: '100%',
@@ -74,12 +103,19 @@ Select.Button = function Button({ children }) {
 	);
 };
 
-Select.Options = function Options({ children }) {
+Select.Options = function Options({
+	children,
+	isOpen,
+	label,
+	value,
+	onChange,
+}) {
 	const theme = useTheme();
 	return (
 		<div
 			css={{
-				opacity: 0,
+				display: isOpen ? 'block' : 'none',
+				zIndex: 2,
 				position: 'absolute',
 				marginTop: '0.25rem',
 				width: '100%',
@@ -92,8 +128,8 @@ Select.Options = function Options({ children }) {
 			<ul
 				tabIndex="-1"
 				role="listbox"
-				aria-labelledby="listbox-label"
-				aria-activedescendant="lisbox-item-3"
+				aria-labelledby={`listbox-${label}`}
+				aria-activedescendant="lisbox-item-2"
 				css={{
 					padding: '4px 0',
 					maxHeight: '20rem',
@@ -101,19 +137,23 @@ Select.Options = function Options({ children }) {
 					overflow: 'auto',
 				}}
 			>
-				{children}
+				{React.Children.map(children, child =>
+					React.cloneElement(child, { value, onChange })
+				)}
 			</ul>
 		</div>
 	);
 };
 
-Select.Option = function Option({ children }) {
+Select.Option = function Option({ children, id, value, onChange }) {
 	const theme = useTheme();
 	return (
 		<li
-			id={`listbox-item-1`}
+			id={`listbox-item-${id}`}
 			role="option"
 			aria-selected={false}
+			value={value}
+			onClick={e => onChange(e.target.value)}
 			css={{
 				color: theme.text,
 				cursor: 'pointer',
