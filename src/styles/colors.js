@@ -1,8 +1,8 @@
-export const bg = '#fafaf9';
-export const bgOffset = '#e7e5e4';
-export const text = '#1c1917';
-export const textOffset = '#404040';
-export const border = '#737373';
-export const primary = '#059669';
-export const primaryOffset = '#34d399';
-export const secondary = '#d946ef';
+export const bg = '#1e293b';
+export const bgOffset = '#0f172a';
+export const text = '#f8fafc';
+export const textOffset = '#64748b';
+export const border = '#334155';
+export const primary = '#0ea5e9';
+export const primaryOffset = '#0284c7';
+export const secondary = '#fbbf24';
