@@ -52,7 +52,7 @@ function Rating({ value, onChange }) {
 					</span>
 					<svg
 						css={{ width: '1rem', height: '1rem', margin: '0 2px' }}
-						fill="none"
+						fill="currentColor"
 						stroke="currentColor"
 						viewBox="0 0 24 24"
 						xmlns="http://www.w3.org/2000/svg"
