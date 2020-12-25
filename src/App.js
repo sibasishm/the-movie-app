@@ -3,11 +3,7 @@
 import { jsx, useTheme } from '@emotion/react';
 import { Routes, Route } from 'react-router-dom';
 
-import { Label } from './components/design-system';
-import { Nav } from './components/nav';
-import { Rating } from './components/rating';
-import { SearchBox } from './components/search-box';
-import { Select } from './components/select';
+import { Label, Nav, Rating, SearchBox, Select } from './components';
 import {
 	NewestScreen,
 	NotFoundScreen,
