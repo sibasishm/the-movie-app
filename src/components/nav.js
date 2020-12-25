@@ -58,12 +58,7 @@ function NavLink(props) {
 
 function Nav(params) {
 	return (
-		<nav
-			css={{
-				position: 'sticky',
-				padding: '1em 1.5em',
-			}}
-		>
+		<nav>
 			<ul
 				css={{
 					display: 'flex',

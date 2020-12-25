@@ -107,11 +107,11 @@ Select.Options = function Options({ children }) {
 	);
 };
 
-Select.Option = function Option({ children, key }) {
+Select.Option = function Option({ children }) {
 	const theme = useTheme();
 	return (
 		<li
-			id={`listbox-item-${key}`}
+			id={`listbox-item-1`}
 			role="option"
 			aria-selected={false}
 			css={{
