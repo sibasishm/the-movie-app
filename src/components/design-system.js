@@ -1,17 +1,15 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { Link as RouterLink } from 'react-router-dom';
 import styled from '@emotion/styled/macro';
+import { Link as RouterLink } from 'react-router-dom';
+
 import * as colors from '../styles/colors';
 
 const Link = styled(RouterLink)({
 	color: colors.primary,
-	fontWeight: 700,
-	padding: '0 0.5rem',
-	textTransform: 'uppercase',
-	fontSize: '0.8rem',
 	':hover': {
 		color: colors.primaryOffset,
+		textDecoration: 'underline',
 	},
 });
 

@@ -1,12 +1,16 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, useTheme } from '@emotion/react';
+import { Routes, Route } from 'react-router-dom';
 
-import { Label, Link } from './components/design-system';
-import { MovieCard } from './components/movie-card';
-import { Rating } from './components/rating';
-import { SearchBox } from './components/search-box';
-import { Select } from './components/select';
+import { Label, Nav, Rating, SearchBox, Select } from './components';
+import {
+	NewestScreen,
+	NotFoundScreen,
+	PopularScreen,
+	TopRatedScreen,
+	TrendScreen,
+} from './screens';
 
 const types = [
 	{
@@ -48,45 +52,18 @@ function App() {
 					}}
 				>
 					<h1>Discover</h1>
-					<nav>
-						<ul
-							css={{
-								display: 'flex',
-								alignItems: 'center',
-							}}
-						>
-							<li>
-								<Link>Popular</Link>
-							</li>
-							<li>
-								<Link>Trend</Link>
-							</li>
-							<li>
-								<Link>Newest</Link>
-							</li>
-							<li>
-								<Link>Top rated</Link>
-							</li>
-						</ul>
-					</nav>
+					<Nav />
 					<SearchBox />
 				</header>
-				<main>
-					<ol
-						css={{
-							padding: '1rem 0',
-							display: 'grid',
-							gap: '1rem',
-							gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-						}}
-					>
-						<li>
-							<MovieCard />
-						</li>
-						<li>
-							<MovieCard />
-						</li>
-					</ol>
+				<main
+					css={{
+						padding: '1rem 0',
+						display: 'grid',
+						gap: '1rem',
+						gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+					}}
+				>
+					<AppRoutes />
 				</main>
 			</div>
 			<aside
@@ -139,6 +116,18 @@ function App() {
 				</form>
 			</aside>
 		</div>
+	);
+}
+
+function AppRoutes() {
+	return (
+		<Routes>
+			<Route path="/popular" element={<PopularScreen />} />
+			<Route path="/trend" element={<TrendScreen />} />
+			<Route path="/newest" element={<NewestScreen />} />
+			<Route path="/top-rated" element={<TopRatedScreen />} />
+			<Route path="*" element={<NotFoundScreen />} />
+		</Routes>
 	);
 }
 
