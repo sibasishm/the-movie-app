@@ -3,10 +3,11 @@
 import { Link as RouterLink } from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 import * as colors from '../styles/colors';
-import * as mq from '../styles/media-queries';
 
 const Link = styled(RouterLink)({
 	color: colors.primary,
+	fontWeight: 700,
+	padding: '0 0.5rem',
 	':hover': {
 		color: colors.primaryOffset,
 	},
@@ -17,7 +18,8 @@ const Label = styled.label({
 	color: colors.textOffset,
 	display: 'block',
 	fontSize: '0.75rem',
-	fontWeight: 500,
+	fontWeight: 700,
+	margin: '0.75rem 0',
 });
 Label.defaultProps = {
 	id: 'listbox-label',

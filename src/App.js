@@ -2,9 +2,10 @@
 /** @jsx jsx */
 import { jsx, useTheme } from '@emotion/react';
 
-import { Label } from './components/design-system';
+import { Label, Link } from './components/design-system';
 import { MovieCard } from './components/movie-card';
 import { Rating } from './components/rating';
+import { SearchBox } from './components/search-box';
 import { Select } from './components/select';
 
 const types = [
@@ -54,13 +55,21 @@ function App() {
 								alignItems: 'center',
 							}}
 						>
-							<li>Popular</li>
-							<li>Trend</li>
-							<li>Newest</li>
-							<li>Top rated</li>
+							<li>
+								<Link>Popular</Link>
+							</li>
+							<li>
+								<Link>Trend</Link>
+							</li>
+							<li>
+								<Link>Newest</Link>
+							</li>
+							<li>
+								<Link>Top rated</Link>
+							</li>
 						</ul>
 					</nav>
-					<div>Search</div>
+					<SearchBox />
 				</header>
 				<main>
 					<ol
@@ -85,6 +94,8 @@ function App() {
 					padding: '1.5rem 1rem',
 					background: theme.bgOffset,
 					color: theme.textOffset,
+					boxShadow:
+						'0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
 				}}
 			>
 				<h3>Discover options</h3>
@@ -100,16 +111,30 @@ function App() {
 							))}
 						</Select.Options>
 					</Select>
-					<label htmlFor="genre">Genre</label>
-					<Select />
-					<label htmlFor="year">year</label>
-					<div>
-						<Select />
-						<span> - </span>
-						<Select />
-					</div>
-					<label htmlFor="rating">Rating</label>
-					<Rating />
+					<Label>Genre</Label>
+					<Select value={types[1]} onChange={() => {}}>
+						<Select.Button>Movies</Select.Button>
+						<Select.Options>
+							{types.map(type => (
+								<Select.Option key={type.id} value={type}>
+									{type.name}
+								</Select.Option>
+							))}
+						</Select.Options>
+					</Select>
+					<Label>Year</Label>
+					<Select value={types[1]} onChange={() => {}}>
+						<Select.Button>Movies</Select.Button>
+						<Select.Options>
+							{types.map(type => (
+								<Select.Option key={type.id} value={type}>
+									{type.name}
+								</Select.Option>
+							))}
+						</Select.Options>
+					</Select>
+					<Label>Rating</Label>
+					<Rating listItem={{ id: 1, rating: 3 }} />
 				</form>
 			</aside>
 		</div>

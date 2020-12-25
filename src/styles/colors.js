@@ -5,4 +5,4 @@ export const textOffset = '#64748b';
 export const border = '#334155';
 export const primary = '#0ea5e9';
 export const primaryOffset = '#0284c7';
-export const secondary = '#f43f5e';
+export const secondary = '#fbbf24';
