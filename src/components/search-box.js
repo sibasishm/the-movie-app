@@ -60,13 +60,14 @@ function SearchBox({ value, onChange }) {
 					padding: '0.5rem 2.5rem',
 					background: theme.bg,
 					border: 0,
+					borderBottom: `2px solid ${theme.border}`,
 					color: theme.text,
 					'::placeholder': {
 						color: theme.primary,
 						fontWeight: 600,
 					},
 					':hover': {
-						borderBottom: `2px solid ${theme.border}`,
+						borderColor: theme.primary,
 					},
 					':focus': {
 						outline: 0,

@@ -5,6 +5,7 @@ import { jsx, useTheme } from '@emotion/react';
 import Select from 'react-select';
 
 import { AppRoutes } from './app-routes';
+import { DiscoverProvider } from './context/discover-context';
 import { Nav, SearchBox, Label, Rating } from './components';
 import { types, genres, years } from './constants';
 import * as colors from './styles/colors';
@@ -36,12 +37,21 @@ const customStyles = {
 function App() {
 	const theme = useTheme();
 
-	const [type, setType] = React.useState(types[0].value);
-	const [genre, setGenre] = React.useState(genres[0].value);
-	const [startYear, setStartYear] = React.useState(years[0].value);
-	const [endYear, setEndYear] = React.useState(years[10].value);
+	const [type, setType] = React.useState(types[0]);
+	const [genre, setGenre] = React.useState(genres[0]);
+	const [startYear, setStartYear] = React.useState(years[0]);
+	const [endYear, setEndYear] = React.useState(years[10]);
 	const [rating, setRating] = React.useState(3);
 	const [searchTerm, setSearchTerm] = React.useState('');
+
+	const props = {
+		type,
+		genre,
+		startYear,
+		endYear,
+		rating,
+		searchTerm,
+	};
 
 	return (
 		<div
@@ -82,7 +92,9 @@ function App() {
 						gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
 					}}
 				>
-					<AppRoutes />
+					<DiscoverProvider {...props}>
+						<AppRoutes />
+					</DiscoverProvider>
 				</main>
 			</div>
 			<aside
@@ -103,7 +115,7 @@ function App() {
 				<form>
 					<Label>Type</Label>
 					<Select
-						value={type}
+						value={types}
 						styles={customStyles}
 						options={types}
 						onChange={val => setType(val)}
