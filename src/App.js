@@ -2,17 +2,10 @@
 /** @jsx jsx */
 import * as React from 'react';
 import { jsx, useTheme } from '@emotion/react';
-import { Routes, Route } from 'react-router-dom';
 import Select from 'react-select';
 
+import { AppRoutes } from './app-routes';
 import { Nav, SearchBox, Label, Rating } from './components';
-import {
-	NewestScreen,
-	NotFoundScreen,
-	PopularScreen,
-	TopRatedScreen,
-	TrendScreen,
-} from './screens';
 import { types, genres, years } from './constants';
 import * as colors from './styles/colors';
 
@@ -169,18 +162,6 @@ function App() {
 				</form>
 			</aside>
 		</div>
-	);
-}
-
-function AppRoutes() {
-	return (
-		<Routes>
-			<Route path="/popular" element={<PopularScreen />} />
-			<Route path="/trend" element={<TrendScreen />} />
-			<Route path="/newest" element={<NewestScreen />} />
-			<Route path="/top-rated" element={<TopRatedScreen />} />
-			<Route path="*" element={<NotFoundScreen />} />
-		</Routes>
 	);
 }
 

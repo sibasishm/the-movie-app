@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useQuery } from 'react-query';
+import { useLocation } from 'react-router-dom';
+
 import { FullPageSpinner } from '../components';
 import { client } from '../utils/api-client';
 
@@ -15,6 +17,10 @@ function DiscoverProvider(props) {
 	} = useQuery('newest-movies', () =>
 		client('/movie/now_playing').then(data => data.results)
 	);
+
+	const location = useLocation();
+
+	console.log(location.pathname);
 
 	if (isLoading) {
 		return <FullPageSpinner />;
