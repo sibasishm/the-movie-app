@@ -3,7 +3,17 @@
 import { jsx, useTheme } from '@emotion/react';
 
 function Card({ children }) {
-	return <div>{children}</div>;
+	return (
+		<div
+			css={{
+				display: 'flex',
+				flexDirection: 'column',
+				textAlign: 'center',
+			}}
+		>
+			{children}
+		</div>
+	);
 }
 
 Card.Image = function Image({ src, title }) {
@@ -16,8 +26,9 @@ Card.Title = function Title({ children }) {
 	return (
 		<h2
 			css={{
-				color: theme.text,
-				fontSize: '1.5rem',
+				marginTop: '0.5rem',
+				color: theme.primary,
+				fontSize: '1rem',
 			}}
 		>
 			{children}
@@ -30,7 +41,9 @@ Card.Meta = function Meta({ children }) {
 	return (
 		<p
 			css={{
+				marginTop: '0.25rem',
 				color: theme.textOffset,
+				fontSize: '0.8rem',
 			}}
 		>
 			{children}

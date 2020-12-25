@@ -41,6 +41,7 @@ function App() {
 					background: theme.bg,
 					color: theme.text,
 					flex: 1,
+					maxWidth: `calc(100vw - 300px)`,
 				}}
 			>
 				<header
@@ -62,7 +63,7 @@ function App() {
 					css={{
 						padding: '1rem 2rem',
 						display: 'grid',
-						gap: '1rem',
+						gap: '4rem',
 						gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
 					}}
 				>
@@ -71,7 +72,11 @@ function App() {
 			</div>
 			<aside
 				css={{
-					minWidth: '350px',
+					position: 'fixed',
+					top: 0,
+					bottom: 0,
+					right: 0,
+					minWidth: '300px',
 					padding: '2rem 1.5rem',
 					background: theme.bgOffset,
 					color: theme.textOffset,
