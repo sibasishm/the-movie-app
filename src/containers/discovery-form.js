@@ -7,14 +7,10 @@ import { Label, Rating, Select } from '../components';
 const types = [
 	{
 		id: 1,
-		name: 'All',
-	},
-	{
-		id: 2,
 		name: 'Movies',
 	},
 	{
-		id: 3,
+		id: 2,
 		name: 'TV Series',
 	},
 ];
@@ -47,10 +43,10 @@ function DiscoveryForm() {
 		<form>
 			<Label>Type</Label>
 			<Select value={type} onChange={val => setType(val)} label="type">
-				<Select.Button>{type}</Select.Button>
+				<Select.Button>{type.name}</Select.Button>
 				<Select.Options>
 					{types.map(type => (
-						<Select.Option key={type.id} value={type} id={type.id}>
+						<Select.Option key={type.id} value={type}>
 							{type.name}
 						</Select.Option>
 					))}
@@ -58,10 +54,10 @@ function DiscoveryForm() {
 			</Select>
 			<Label>Genre</Label>
 			<Select value={genre} onChange={val => setGenre(val)} label="genre">
-				<Select.Button>{genre}</Select.Button>
+				<Select.Button>{genre.name}</Select.Button>
 				<Select.Options>
 					{genres.map(genre => (
-						<Select.Option key={genre.id} value={genre} id={genre.id}>
+						<Select.Option key={genre.id} value={genre}>
 							{genre.name}
 						</Select.Option>
 					))}
@@ -82,13 +78,21 @@ function DiscoveryForm() {
 					<Select.Button>{startYear}</Select.Button>
 					<Select.Options>
 						{years.map(year => (
-							<Select.Option key={year.id} value={year} id={year.id}>
-								{year.name}
+							<Select.Option key={year} value={year}>
+								{year}
 							</Select.Option>
 						))}
 					</Select.Options>
 				</Select>
-				<span> - </span>
+				<span
+					css={{
+						fontSize: '2rem',
+						fontWeight: 700,
+						padding: '0 0.5rem',
+					}}
+				>
+					-
+				</span>
 				<Select
 					value={endYear}
 					onChange={val => setEndYear(val)}
@@ -97,8 +101,8 @@ function DiscoveryForm() {
 					<Select.Button>{endYear}</Select.Button>
 					<Select.Options>
 						{years.map(year => (
-							<Select.Option key={year.id} value={year} id={year.id}>
-								{year.name}
+							<Select.Option key={year} value={year}>
+								{year}
 							</Select.Option>
 						))}
 					</Select.Options>

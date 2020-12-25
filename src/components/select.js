@@ -9,6 +9,7 @@ function Select({ value, onChange, children, label }) {
 		<div
 			css={{
 				position: 'relative',
+				width: '100%',
 			}}
 		>
 			{React.Children.map(children, child => {
@@ -114,8 +115,7 @@ Select.Options = function Options({
 	return (
 		<div
 			css={{
-				display: isOpen ? 'block' : 'none',
-				zIndex: 2,
+				opacity: isOpen ? 1 : 0,
 				position: 'absolute',
 				marginTop: '0.25rem',
 				width: '100%',
@@ -129,31 +129,33 @@ Select.Options = function Options({
 				tabIndex="-1"
 				role="listbox"
 				aria-labelledby={`listbox-${label}`}
-				aria-activedescendant="lisbox-item-2"
+				aria-activedescendant={`listbox-item-${value.id || value}`}
 				css={{
 					padding: '4px 0',
 					maxHeight: '20rem',
 					borderRadius: '4px',
 					overflow: 'auto',
 				}}
+				onClick={e => {
+					console.log(e.target.value);
+				}}
 			>
 				{React.Children.map(children, child =>
-					React.cloneElement(child, { value, onChange })
+					React.cloneElement(child, { selected: value === child.value })
 				)}
 			</ul>
 		</div>
 	);
 };
 
-Select.Option = function Option({ children, id, value, onChange }) {
+Select.Option = function Option({ children, value, onChange, selected }) {
 	const theme = useTheme();
 	return (
 		<li
-			id={`listbox-item-${id}`}
+			id={`listbox-item-${value.id || value}`}
 			role="option"
-			aria-selected={false}
-			value={value}
-			onClick={e => onChange(e.target.value)}
+			aria-selected={selected}
+			value={JSON.stringify(value)}
 			css={{
 				color: theme.text,
 				cursor: 'pointer',
