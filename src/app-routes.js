@@ -13,7 +13,7 @@ function AppRoutes() {
 			<Route path="/popular" element={<PopularScreen />} />
 			<Route path="/trend" element={<TrendScreen />} />
 			<Route path="/newest" element={<NewestScreen />} />
-			<Route path="/top-rated" element={<TopRatedScreen />} />
+			<Route path="/top_rated" element={<TopRatedScreen />} />
 			<Route path="*" element={<NotFoundScreen />} />
 		</Routes>
 	);

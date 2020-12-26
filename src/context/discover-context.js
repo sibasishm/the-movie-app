@@ -8,19 +8,21 @@ import { client } from '../utils/api-client';
 const DiscoverContext = React.createContext();
 
 function DiscoverProvider(props) {
+	let { pathname } = useLocation();
 	const {
-		data,
-		error,
-		isLoading,
-		isError,
-		isSuccess,
-	} = useQuery('newest-movies', () =>
-		client('/movie/now_playing').then(data => data.results)
+		type: { value: mediaType },
+	} = props;
+
+	if (pathname.includes('newest')) {
+		pathname = mediaType === 'tv' ? '/airing_today' : '/now_playing';
+	}
+
+	const endpoint = `${mediaType}${pathname}`;
+
+	const { data, error, isLoading, isError, isSuccess } = useQuery(
+		endpoint,
+		() => client(`/${endpoint}`).then(data => data.results)
 	);
-
-	const location = useLocation();
-
-	console.log(location.pathname);
 
 	if (isLoading) {
 		return <FullPageSpinner />;
@@ -35,4 +37,8 @@ function DiscoverProvider(props) {
 	}
 }
 
-export { DiscoverProvider };
+function useDiscover() {
+	return React.useContext(DiscoverContext);
+}
+
+export { DiscoverProvider, useDiscover };

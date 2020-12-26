@@ -2,12 +2,12 @@ const types = [
 	{
 		id: 1,
 		label: 'Movies',
-		value: 'movies',
+		value: 'movie',
 	},
 	{
 		id: 2,
 		label: 'TV Series',
-		value: 'tv_series',
+		value: 'tv',
 	},
 ];
 
@@ -53,7 +53,7 @@ const links = [
 	{
 		id: 4,
 		name: 'Top rated',
-		link: '/top-rated',
+		link: '/top_rated',
 	},
 ];
 
