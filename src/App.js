@@ -2,6 +2,7 @@
 /** @jsx jsx */
 import * as React from 'react';
 import { jsx, useTheme } from '@emotion/react';
+import { ErrorBoundary } from 'react-error-boundary';
 import Select from 'react-select';
 
 import { AppRoutes } from './app-routes';
@@ -12,8 +13,19 @@ import {
 	Label,
 	Rating,
 	customSelectStyles as customStyles,
+	ErrorMessage,
+	ErrorContainer,
 } from './components';
 import { types, genres, years } from './constants';
+
+function ErrorFallback({ error }) {
+	return (
+		<ErrorContainer>
+			<h3>Oops! Some error occured.</h3>
+			<ErrorMessage>{error.status_message}</ErrorMessage>
+		</ErrorContainer>
+	);
+}
 
 function App() {
 	const theme = useTheme();
@@ -66,9 +78,11 @@ function App() {
 					<SearchBox val={searchTerm} onChange={setSearchTerm} />
 				</header>
 				<main css={{ padding: '1.5rem 2rem' }}>
-					<DiscoverProvider {...props}>
-						<AppRoutes />
-					</DiscoverProvider>
+					<ErrorBoundary FallbackComponent={ErrorFallback}>
+						<DiscoverProvider {...props}>
+							<AppRoutes />
+						</DiscoverProvider>
+					</ErrorBoundary>
 				</main>
 			</div>
 			<aside

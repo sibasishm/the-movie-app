@@ -57,6 +57,11 @@ const links = [
 	},
 	{
 		id: 3,
+		name: 'Trending',
+		link: '/trending',
+	},
+	{
+		id: 4,
 		name: 'Top rated',
 		link: '/top_rated',
 	},

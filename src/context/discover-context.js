@@ -2,13 +2,15 @@ import * as React from 'react';
 import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
 
-import { FullPageSpinner } from '../components';
+import { ErrorMessage, FullPageSpinner } from '../components';
 import { client } from '../utils/api-client';
 
 const DiscoverContext = React.createContext();
 
 function DiscoverProvider(props) {
 	let { pathname } = useLocation();
+	let endpoint = '';
+
 	const {
 		type: { value: mediaType },
 		searchTerm,
@@ -18,7 +20,11 @@ function DiscoverProvider(props) {
 		pathname = mediaType === 'tv' ? '/airing_today' : '/now_playing';
 	}
 
-	const endpoint = `${mediaType}${pathname}`;
+	if (pathname.includes('trending')) {
+		endpoint = `trending/${mediaType}/waek`;
+	} else {
+		endpoint = `${mediaType}${pathname}`;
+	}
 
 	const { data, error, isLoading, isError, isSuccess } = useQuery(
 		endpoint,
@@ -30,7 +36,7 @@ function DiscoverProvider(props) {
 	}
 
 	if (isError) {
-		return <p>{error.message}</p>;
+		return <ErrorMessage>{error.status_message}</ErrorMessage>;
 	}
 
 	if (isSuccess) {

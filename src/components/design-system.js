@@ -61,4 +61,27 @@ const customSelectStyles = {
 	}),
 };
 
-export { Link, Label, screenReaderOnly, customSelectStyles };
+const ErrorContainer = styled.div({
+	color: colors.secondary,
+	height: '100%',
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'center',
+	alignItems: 'center',
+});
+ErrorContainer.role = 'alert';
+
+const ErrorMessage = styled.pre({
+	whiteSpace: 'break-spaces',
+	margin: '0.5rem 0 ',
+	display: 'block',
+});
+
+export {
+	Link,
+	Label,
+	screenReaderOnly,
+	customSelectStyles,
+	ErrorMessage,
+	ErrorContainer,
+};
