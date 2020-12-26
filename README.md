@@ -7,8 +7,14 @@ enhanced with my
 which is an accumulation of my experience with creating react apps with an
 opinionated file structure and bare minimum packages. You can refer this
 [README.md](https://github.com/sibasishm/the-ultimate-react-boilerplate/blob/main/README.md)
-to know more about the decision behind the choices I made while making this
-boilerplate.
+to know more about the choices I made while making this boilerplate.
+
+## Setup
+
+1. Clone this repository.
+2. Install the packages.
+3. Replace the `.env.sample` by `.env` with your API keys.
+4. You should be good to go with the following scripts.
 
 ## Available Scripts
 
@@ -61,6 +67,9 @@ feature. However we understand that this tool wouldn’t be useful if you couldn
 customize it when you are ready for it.
 
 ## Deployment
+
+This app is deployed [here](https://brave-goldberg-880aea.netlify.app) using
+[netlify](https://app.netlify.com/).
 
 You can learn more in the
 [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
