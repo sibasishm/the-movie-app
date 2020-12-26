@@ -39,6 +39,7 @@ function FullPageSpinner() {
 	return (
 		<div
 			css={{
+				height: '90vh',
 				display: 'flex',
 				flexDirection: 'column',
 				justifyContent: 'center',

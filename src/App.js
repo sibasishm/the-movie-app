@@ -65,14 +65,7 @@ function App() {
 					<Nav />
 					<SearchBox val={searchTerm} onChange={setSearchTerm} />
 				</header>
-				<main
-					css={{
-						padding: '1rem 2rem',
-						display: 'grid',
-						gap: '4rem',
-						gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-					}}
-				>
+				<main>
 					<DiscoverProvider {...props}>
 						<AppRoutes />
 					</DiscoverProvider>
