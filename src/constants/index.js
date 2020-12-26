@@ -42,16 +42,11 @@ const links = [
 	},
 	{
 		id: 2,
-		name: 'Trend',
-		link: 'trend',
-	},
-	{
-		id: 3,
 		name: 'Newest',
 		link: 'newest',
 	},
 	{
-		id: 4,
+		id: 3,
 		name: 'Top rated',
 		link: '/top_rated',
 	},

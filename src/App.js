@@ -96,7 +96,7 @@ function App() {
 				<form>
 					<Label>Type</Label>
 					<Select
-						value={types}
+						value={type}
 						styles={customStyles}
 						options={types}
 						onChange={val => setType(val)}
