@@ -27,6 +27,16 @@ const genres = [
 		label: 'Comedy',
 		value: 'comedy',
 	},
+	{
+		id: 4,
+		label: 'Thriller',
+		value: 'thriller',
+	},
+	{
+		id: 5,
+		label: 'Sci-Fi',
+		value: 'scifi',
+	},
 ];
 
 const years = new Array(20)

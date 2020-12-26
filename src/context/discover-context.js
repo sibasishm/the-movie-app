@@ -11,6 +11,7 @@ function DiscoverProvider(props) {
 	let { pathname } = useLocation();
 	const {
 		type: { value: mediaType },
+		searchTerm,
 	} = props;
 
 	if (pathname.includes('newest')) {
@@ -33,7 +34,11 @@ function DiscoverProvider(props) {
 	}
 
 	if (isSuccess) {
-		return <DiscoverContext.Provider value={data} {...props} />;
+		const filteredData = data.filter(({ title, name }) => {
+			const nameFiled = (title || name).toLowerCase();
+			return nameFiled.includes(searchTerm.toLowerCase());
+		});
+		return <DiscoverContext.Provider value={filteredData} {...props} />;
 	}
 }
 

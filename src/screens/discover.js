@@ -12,7 +12,6 @@ function DiscoverScreen() {
 	return data.length ? (
 		<ol
 			css={{
-				padding: '1rem 2rem',
 				display: 'grid',
 				gap: '4rem',
 				gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',

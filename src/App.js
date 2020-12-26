@@ -65,7 +65,7 @@ function App() {
 					<Nav />
 					<SearchBox val={searchTerm} onChange={setSearchTerm} />
 				</header>
-				<main>
+				<main css={{ padding: '1.5rem 2rem' }}>
 					<DiscoverProvider {...props}>
 						<AppRoutes />
 					</DiscoverProvider>
@@ -120,7 +120,6 @@ function App() {
 								onChange={val => setStartYear(val)}
 							/>
 						</span>
-
 						<span
 							css={{
 								fontSize: '2rem',
