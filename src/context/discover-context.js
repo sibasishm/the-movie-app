@@ -1,19 +1,34 @@
 import * as React from 'react';
 import { useQuery } from 'react-query';
-import { FullPageSpinner } from '../components';
+import { useLocation } from 'react-router-dom';
+
+import { ErrorMessage, FullPageSpinner } from '../components';
 import { client } from '../utils/api-client';
 
 const DiscoverContext = React.createContext();
 
 function DiscoverProvider(props) {
+	let { pathname } = useLocation();
+	let endpoint = '';
+
 	const {
-		data,
-		error,
-		isLoading,
-		isError,
-		isSuccess,
-	} = useQuery('newest-movies', () =>
-		client('/movie/now_playing').then(data => data.results)
+		type: { value: mediaType },
+		searchTerm,
+	} = props;
+
+	if (pathname.includes('newest')) {
+		pathname = mediaType === 'tv' ? '/airing_today' : '/now_playing';
+	}
+
+	if (pathname.includes('trending')) {
+		endpoint = `trending/${mediaType}/week`;
+	} else {
+		endpoint = `${mediaType}${pathname}`;
+	}
+
+	const { data, error, isLoading, isError, isSuccess } = useQuery(
+		endpoint,
+		() => client(`/${endpoint}`).then(data => data.results)
 	);
 
 	if (isLoading) {
@@ -21,12 +36,20 @@ function DiscoverProvider(props) {
 	}
 
 	if (isError) {
-		return <p>{error.message}</p>;
+		return <ErrorMessage>{error.status_message}</ErrorMessage>;
 	}
 
 	if (isSuccess) {
-		return <DiscoverContext.Provider value={data} {...props} />;
+		const filteredData = data.filter(({ title, name }) => {
+			const nameFiled = (title || name).toLowerCase();
+			return nameFiled.includes(searchTerm.toLowerCase());
+		});
+		return <DiscoverContext.Provider value={filteredData} {...props} />;
 	}
 }
 
-export { DiscoverProvider };
+function useDiscover() {
+	return React.useContext(DiscoverContext);
+}
+
+export { DiscoverProvider, useDiscover };

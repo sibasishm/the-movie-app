@@ -37,4 +37,51 @@ const screenReaderOnly = {
 	borderWidth: 0,
 };
 
-export { Link, Label, screenReaderOnly };
+const customSelectStyles = {
+	menu: provided => ({
+		...provided,
+		background: colors.bg,
+	}),
+	input: provided => ({
+		...provided,
+		color: colors.text,
+	}),
+	singleValue: provided => ({
+		...provided,
+		color: colors.text,
+	}),
+	control: provided => ({
+		...provided,
+		background: colors.bg,
+		border: `1px solid ${colors.border}`,
+	}),
+	option: (provided, state) => ({
+		...provided,
+		color: state.isSelected ? colors.text : colors.textOffset,
+	}),
+};
+
+const ErrorContainer = styled.div({
+	color: colors.secondary,
+	height: '100%',
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'center',
+	alignItems: 'center',
+});
+ErrorContainer.role = 'alert';
+
+const ErrorMessage = styled.pre({
+	whiteSpace: 'break-spaces',
+	margin: '0.5rem 0 ',
+	display: 'block',
+});
+
+export {
+	Link,
+	Label,
+	screenReaderOnly,
+	customSelectStyles,
+	ErrorMessage,
+	ErrorContainer,
+};

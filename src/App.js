@@ -2,53 +2,49 @@
 /** @jsx jsx */
 import * as React from 'react';
 import { jsx, useTheme } from '@emotion/react';
-import { Routes, Route } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 import Select from 'react-select';
 
-import { Nav, SearchBox, Label, Rating } from './components';
+import { AppRoutes } from './app-routes';
+import { DiscoverProvider } from './context/discover-context';
 import {
-	NewestScreen,
-	NotFoundScreen,
-	PopularScreen,
-	TopRatedScreen,
-	TrendScreen,
-} from './screens';
+	Nav,
+	SearchBox,
+	Label,
+	Rating,
+	customSelectStyles as customStyles,
+	ErrorMessage,
+	ErrorContainer,
+} from './components';
 import { types, genres, years } from './constants';
-import * as colors from './styles/colors';
 
-const customStyles = {
-	menu: provided => ({
-		...provided,
-		background: colors.bg,
-	}),
-	input: provided => ({
-		...provided,
-		color: colors.text,
-	}),
-	singleValue: provided => ({
-		...provided,
-		color: colors.text,
-	}),
-	control: provided => ({
-		...provided,
-		background: colors.bg,
-		border: `1px solid ${colors.border}`,
-	}),
-	option: (provided, state) => ({
-		...provided,
-		color: state.isSelected ? colors.text : colors.textOffset,
-	}),
-};
+function ErrorFallback({ error }) {
+	return (
+		<ErrorContainer>
+			<h3>Oops! Some error occured.</h3>
+			<ErrorMessage>{error.status_message}</ErrorMessage>
+		</ErrorContainer>
+	);
+}
 
 function App() {
 	const theme = useTheme();
 
-	const [type, setType] = React.useState(types[0].value);
-	const [genre, setGenre] = React.useState(genres[0].value);
-	const [startYear, setStartYear] = React.useState(years[0].value);
-	const [endYear, setEndYear] = React.useState(years[10].value);
+	const [type, setType] = React.useState(types[0]);
+	const [genre, setGenre] = React.useState(genres[0]);
+	const [startYear, setStartYear] = React.useState(years[0]);
+	const [endYear, setEndYear] = React.useState(years[10]);
 	const [rating, setRating] = React.useState(3);
 	const [searchTerm, setSearchTerm] = React.useState('');
+
+	const props = {
+		type,
+		genre,
+		startYear,
+		endYear,
+		rating,
+		searchTerm,
+	};
 
 	return (
 		<div
@@ -81,15 +77,12 @@ function App() {
 					<Nav />
 					<SearchBox val={searchTerm} onChange={setSearchTerm} />
 				</header>
-				<main
-					css={{
-						padding: '1rem 2rem',
-						display: 'grid',
-						gap: '4rem',
-						gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-					}}
-				>
-					<AppRoutes />
+				<main css={{ padding: '1.5rem 2rem' }}>
+					<ErrorBoundary FallbackComponent={ErrorFallback}>
+						<DiscoverProvider {...props}>
+							<AppRoutes />
+						</DiscoverProvider>
+					</ErrorBoundary>
 				</main>
 			</div>
 			<aside
@@ -141,7 +134,6 @@ function App() {
 								onChange={val => setStartYear(val)}
 							/>
 						</span>
-
 						<span
 							css={{
 								fontSize: '2rem',
@@ -169,18 +161,6 @@ function App() {
 				</form>
 			</aside>
 		</div>
-	);
-}
-
-function AppRoutes() {
-	return (
-		<Routes>
-			<Route path="/popular" element={<PopularScreen />} />
-			<Route path="/trend" element={<TrendScreen />} />
-			<Route path="/newest" element={<NewestScreen />} />
-			<Route path="/top-rated" element={<TopRatedScreen />} />
-			<Route path="*" element={<NotFoundScreen />} />
-		</Routes>
 	);
 }
 

@@ -2,29 +2,7 @@
 /** @jsx jsx */
 import { jsx, useTheme } from '@emotion/react';
 import { Link as RouterLink, useMatch } from 'react-router-dom';
-
-const links = [
-	{
-		id: 1,
-		name: 'Popular',
-		link: 'popular',
-	},
-	{
-		id: 2,
-		name: 'Trend',
-		link: 'trend',
-	},
-	{
-		id: 3,
-		name: 'Newest',
-		link: 'newest',
-	},
-	{
-		id: 4,
-		name: 'Top rated',
-		link: '/top-rated',
-	},
-];
+import { links } from '../constants';
 
 function NavLink(props) {
 	const theme = useTheme();

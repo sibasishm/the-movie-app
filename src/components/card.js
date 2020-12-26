@@ -43,7 +43,8 @@ Card.Meta = function Meta({ children }) {
 			css={{
 				marginTop: '0.25rem',
 				color: theme.textOffset,
-				fontSize: '0.8rem',
+				fontSize: '0.9rem',
+				fontWeight: 700,
 			}}
 		>
 			{children}

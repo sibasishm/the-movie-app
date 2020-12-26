@@ -2,12 +2,12 @@ const types = [
 	{
 		id: 1,
 		label: 'Movies',
-		value: 'movies',
+		value: 'movie',
 	},
 	{
 		id: 2,
 		label: 'TV Series',
-		value: 'tv_series',
+		value: 'tv',
 	},
 ];
 
@@ -27,6 +27,16 @@ const genres = [
 		label: 'Comedy',
 		value: 'comedy',
 	},
+	{
+		id: 4,
+		label: 'Thriller',
+		value: 'thriller',
+	},
+	{
+		id: 5,
+		label: 'Sci-Fi',
+		value: 'scifi',
+	},
 ];
 
 const years = new Array(20)
@@ -34,4 +44,27 @@ const years = new Array(20)
 	.map((val, i) => val + i)
 	.map(val => ({ id: val, label: val, value: val }));
 
-export { types, genres, years };
+const links = [
+	{
+		id: 1,
+		name: 'Popular',
+		link: 'popular',
+	},
+	{
+		id: 2,
+		name: 'Newest',
+		link: 'newest',
+	},
+	{
+		id: 3,
+		name: 'Trending',
+		link: '/trending',
+	},
+	{
+		id: 4,
+		name: 'Top rated',
+		link: '/top_rated',
+	},
+];
+
+export { types, genres, years, links };
