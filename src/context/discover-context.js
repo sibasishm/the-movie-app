@@ -21,7 +21,7 @@ function DiscoverProvider(props) {
 	}
 
 	if (pathname.includes('trending')) {
-		endpoint = `trending/${mediaType}/waek`;
+		endpoint = `trending/${mediaType}/week`;
 	} else {
 		endpoint = `${mediaType}${pathname}`;
 	}
