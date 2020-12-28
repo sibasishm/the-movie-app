@@ -48,8 +48,7 @@ function SearchBox({ value, onChange }) {
 			</label>
 			<input
 				type="text"
-				name="search"
-				id="seach"
+				id="search"
 				autoComplete="off"
 				placeholder="Search"
 				value={value}

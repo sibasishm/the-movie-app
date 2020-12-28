@@ -19,11 +19,8 @@ const Label = styled.label({
 	display: 'block',
 	fontSize: '0.75rem',
 	fontWeight: 700,
-	margin: '0.75rem 0',
+	margin: '1.25rem 0 0.75rem 0',
 });
-Label.defaultProps = {
-	id: 'listbox-label',
-};
 
 const screenReaderOnly = {
 	position: 'absolute',

@@ -5,7 +5,6 @@ import { jsx, useTheme } from '@emotion/react';
 import { ErrorBoundary } from 'react-error-boundary';
 import Select from 'react-select';
 
-import { AppRoutes } from './app-routes';
 import { DiscoverProvider } from './context/discover-context';
 import {
 	Nav,
@@ -15,8 +14,14 @@ import {
 	customSelectStyles as customStyles,
 	ErrorMessage,
 	ErrorContainer,
+	screenReaderOnly,
+	FullPageSpinner,
 } from './components';
 import { types, genres, years } from './constants';
+
+const AppRoutes = React.lazy(() =>
+	import(/* webpackPrefetch: true */ './app-routes')
+);
 
 function ErrorFallback({ error }) {
 	return (
@@ -78,11 +83,13 @@ function App() {
 					<SearchBox val={searchTerm} onChange={setSearchTerm} />
 				</header>
 				<main css={{ padding: '1.5rem 2rem' }}>
-					<ErrorBoundary FallbackComponent={ErrorFallback}>
-						<DiscoverProvider {...props}>
-							<AppRoutes />
-						</DiscoverProvider>
-					</ErrorBoundary>
+					<React.Suspense fallback={<FullPageSpinner />}>
+						<ErrorBoundary FallbackComponent={ErrorFallback}>
+							<DiscoverProvider {...props}>
+								<AppRoutes />
+							</DiscoverProvider>
+						</ErrorBoundary>
+					</React.Suspense>
 				</main>
 			</div>
 			<aside
@@ -101,21 +108,26 @@ function App() {
 			>
 				<h3>Discover options</h3>
 				<form>
-					<Label>Type</Label>
+					<Label htmlFor="type">Type</Label>
 					<Select
+						inputId="type"
 						value={type}
 						styles={customStyles}
 						options={types}
 						onChange={val => setType(val)}
 					/>
-					<Label>Genre</Label>
+					<Label htmlFor="genre">Genre</Label>
 					<Select
+						inputId="genre"
 						value={genre}
 						styles={customStyles}
 						options={genres}
 						onChange={val => setGenre(val)}
 					/>
-					<Label>Year</Label>
+					<Label htmlFor="startYear">Year</Label>
+					<Label htmlFor="endYear" css={screenReaderOnly}>
+						End Year
+					</Label>
 					<div
 						css={{
 							display: 'flex',
@@ -128,6 +140,7 @@ function App() {
 							}}
 						>
 							<Select
+								inputId="startYear"
 								value={startYear}
 								styles={customStyles}
 								options={years}
@@ -149,6 +162,7 @@ function App() {
 							}}
 						>
 							<Select
+								inputId="endYear"
 								value={endYear}
 								styles={customStyles}
 								options={years}
