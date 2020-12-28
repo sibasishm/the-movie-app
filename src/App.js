@@ -15,6 +15,7 @@ import {
 	customSelectStyles as customStyles,
 	ErrorMessage,
 	ErrorContainer,
+	screenReaderOnly,
 } from './components';
 import { types, genres, years } from './constants';
 
@@ -101,21 +102,26 @@ function App() {
 			>
 				<h3>Discover options</h3>
 				<form>
-					<Label>Type</Label>
+					<Label htmlFor="type">Type</Label>
 					<Select
+						inputId="type"
 						value={type}
 						styles={customStyles}
 						options={types}
 						onChange={val => setType(val)}
 					/>
-					<Label>Genre</Label>
+					<Label htmlFor="genre">Genre</Label>
 					<Select
+						inputId="genre"
 						value={genre}
 						styles={customStyles}
 						options={genres}
 						onChange={val => setGenre(val)}
 					/>
-					<Label>Year</Label>
+					<Label htmlFor="startYear">Year</Label>
+					<Label htmlFor="endYear" css={screenReaderOnly}>
+						End Year
+					</Label>
 					<div
 						css={{
 							display: 'flex',
@@ -128,6 +134,7 @@ function App() {
 							}}
 						>
 							<Select
+								inputId="startYear"
 								value={startYear}
 								styles={customStyles}
 								options={years}
@@ -149,6 +156,7 @@ function App() {
 							}}
 						>
 							<Select
+								inputId="endYear"
 								value={endYear}
 								styles={customStyles}
 								options={years}

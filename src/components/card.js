@@ -17,7 +17,13 @@ function Card({ children }) {
 }
 
 Card.Image = function Image({ src, title }) {
-	return <img src={src} alt={`${title} movie poster`} />;
+	return (
+		<img
+			css={{ width: '100%', height: '100%', objectFit: 'cover' }}
+			src={src}
+			alt={`${title} movie poster`}
+		/>
+	);
 };
 
 Card.Title = function Title({ children }) {
