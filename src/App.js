@@ -5,7 +5,6 @@ import { jsx, useTheme } from '@emotion/react';
 import { ErrorBoundary } from 'react-error-boundary';
 import Select from 'react-select';
 
-import { AppRoutes } from './app-routes';
 import { DiscoverProvider } from './context/discover-context';
 import {
 	Nav,
@@ -16,8 +15,13 @@ import {
 	ErrorMessage,
 	ErrorContainer,
 	screenReaderOnly,
+	FullPageSpinner,
 } from './components';
 import { types, genres, years } from './constants';
+
+const AppRoutes = React.lazy(() =>
+	import(/* webpackPrefetch: true */ './app-routes')
+);
 
 function ErrorFallback({ error }) {
 	return (
@@ -79,11 +83,13 @@ function App() {
 					<SearchBox val={searchTerm} onChange={setSearchTerm} />
 				</header>
 				<main css={{ padding: '1.5rem 2rem' }}>
-					<ErrorBoundary FallbackComponent={ErrorFallback}>
-						<DiscoverProvider {...props}>
-							<AppRoutes />
-						</DiscoverProvider>
-					</ErrorBoundary>
+					<React.Suspense fallback={<FullPageSpinner />}>
+						<ErrorBoundary FallbackComponent={ErrorFallback}>
+							<DiscoverProvider {...props}>
+								<AppRoutes />
+							</DiscoverProvider>
+						</ErrorBoundary>
+					</React.Suspense>
 				</main>
 			</div>
 			<aside

@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, useTheme } from '@emotion/react';
-import { Label, screenReaderOnly } from './design-system';
+import { screenReaderOnly } from './design-system';
 
 function SearchBox({ value, onChange }) {
 	const theme = useTheme();
@@ -43,9 +43,9 @@ function SearchBox({ value, onChange }) {
 					/>
 				</svg>
 			</span>
-			<Label htmlFor="search" css={screenReaderOnly}>
+			<label htmlFor="search" css={screenReaderOnly}>
 				Search
-			</Label>
+			</label>
 			<input
 				type="text"
 				id="search"

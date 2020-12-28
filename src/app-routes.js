@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { DiscoverScreen, NotFoundScreen } from './screens';
 
-function AppRoutes() {
+export default function AppRoutes() {
 	return (
 		<Routes>
 			<Route path="/popular" element={<DiscoverScreen />} />
@@ -13,5 +13,3 @@ function AppRoutes() {
 		</Routes>
 	);
 }
-
-export { AppRoutes };
